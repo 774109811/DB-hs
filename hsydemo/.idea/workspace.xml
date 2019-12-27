@@ -7,10 +7,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d3b170d0-9010-4ff6-9bf1-f03f57f7ebbf" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="d3b170d0-9010-4ff6-9bf1-f03f57f7ebbf" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -56,7 +53,7 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -149,8 +146,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -173,6 +168,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -390,16 +387,17 @@
       <workItem from="1577070426250" duration="42276000" />
       <workItem from="1577429085378" duration="2194000" />
       <workItem from="1577435849626" duration="54000" />
+      <workItem from="1577436002432" duration="309000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44524000" />
+    <option name="totallyTimeSpent" value="44833000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49758455" visible="true" weight="0.22026667" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49758455" visible="true" weight="0.22293334" />
       <window_info id="Structure" order="1" sideWeight="0.5008" side_tool="true" weight="0.10186667" />
       <window_info id="Designer" order="2" />
       <window_info id="Persistence" order="3" sideWeight="0.5024155" side_tool="true" visible="true" weight="0.22773333" />
@@ -418,7 +416,7 @@
       <window_info anchor="bottom" id="Application Servers" order="7" weight="0.32919955" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32925472" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5002667" side_tool="true" visible="true" weight="0.31737193" />
+      <window_info active="true" anchor="bottom" id="Event Log" order="10" sideWeight="0.5002667" side_tool="true" visible="true" weight="0.48886415" />
       <window_info anchor="bottom" id="Run with VisualVM" order="11" />
       <window_info anchor="bottom" id="Problems" order="12" weight="0.32925472" />
       <window_info anchor="bottom" id="Java Enterprise" order="13" />
@@ -428,7 +426,7 @@
       <window_info anchor="bottom" id="Messages" order="17" weight="0.50506186" />
       <window_info anchor="bottom" id="Debug with VisualVM" order="18" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info active="true" anchor="right" id="Ant Build" order="1" visible="true" weight="0.2496" />
+      <window_info anchor="right" id="Ant Build" order="1" visible="true" weight="0.2496" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Maven" order="3" weight="0.23469931" />
       <window_info anchor="right" id="Palette" order="4" />
