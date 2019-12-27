@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.db.sys.dao.SysRoleDao">
+
+	<!-- 通过sql元素定义sql语句中的共性 -->
+	<sql id="queryWhereId">
+		<where><!-- mybatis 中的动态sql -->
+			<!--if语句中的username来自于dao方法中使用@Param注解定义的参数 -->
+			<if test="name!=null and name!=''">
+				name like concat("%",#{name},"%")
+			</if>
+		</where>
+	</sql>
+	<!-- 依据条件查询总记录数 -->
+	<select id="getRowCount" resultType="int">
+		<!-- select count(*) from sys_Logs where username like ? -->
+		select count(*)
+		from sys_roles
+		<include refid="queryWhereId" />
+		<!-- 其中concat函数用于实现字符串连接 -->
+	</select>
+	<select id="findPageObjects"
+		resultType="com.db.sys.entity.SysRole">
+		<!-- select * from sys_Logs where username like ? limit ?,? -->
+		select *
+		from sys_roles
+		<include refid="queryWhereId" />
+		order by createdTime desc
+		limit #{startIndex},#{pageSize}
+		<!--limit 子句为分页查询子句 ，第一个参数代码起始位置 第二个参数是个数 -->
+	</select>
+
+	<delete id="deleteObject">
+		delete from sys_roles where id=#{id}
+	</delete>
+
+	<!-- useGeneratedKeys 表示使用自增长主键值 -->
+	<!-- keyProperty 主键值为id -->
+	<insert id="insertObject"
+		parameterType="com.db.sys.entity.SysRole" useGeneratedKeys="true"
+		keyProperty="id">
+
+		insert into sys_roles
+		(id,name,note,createdTime,modifiedTime,
+		createdUser,modifiedUser)
+		values
+		(null,#{name},#{note},now(),now(),
+		#{createdUser},#{modifiedUser})
+
+	</insert>
+
+	<select id="findObjectById"
+		resultType="com.db.sys.entity.SysRole">
+		select *
+		from sys_roles
+		where id=#{id}
+	</select>
+
+	<update id="updateObject"
+		parameterType="com.db.sys.entity.SysRole">
+		update sys_roles
+
+		<set>
+			<if test="name!=null and name!=''">
+				name=#{name},
+			</if>
+			<if test="note!=null and note!=''">
+				note=#{note},
+			</if>
+			<if test="modifiedUser!=null and modifiedUser!=''">
+				modifiedUser=#{modifiedUser},
+			</if>
+			modifiedTime=now()
+		</set>
+		where id=#{id}
+	</update>
+
+	<select id="findObjects" resultType="com.db.common.vo.CheckBox">
+	select id,name from sys_roles
+	</select>
+
+
+</mapper>
+
+
+

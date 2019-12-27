@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.db.sys.dao.SysUserDao">
+	<sql id="queryWhereId">
+		<where>
+			<if test="username!=null and username!=''">
+				username like concat("%",#{username},"%")
+			</if>
+		</where>
+	</sql>
+
+	
+	<select id="findPageObjects" resultMap="sysUserDeptVO">
+		select * from sys_users
+		<include refid="queryWhereId" />
+		order by createdTime desc
+		limit #{startIndex},#{pageSize}
+	</select>
+	<select id="getRowCount" resultType="int">
+		select count(*) from sys_users
+		<include refid="queryWhereId" />
+	</select>
+
+
+	<update id="validById">
+
+		update sys_users
+		set valid=#{valid},
+		modifiedUser=#{modifiedUser},
+		modifiedTime=now()
+		where id=#{id}
+
+	</update>
+
+	<insert id="insertObject"
+		parameterType="com.db.sys.entity.SysUser" useGeneratedKeys="true" keyProperty="id">
+		insert into sys_users
+		(username,password,deptId,email,mobile,salt,valid,
+		createdTime,modifiedTime,createdUser,modifiedUser)
+		values
+		(#{username},#{password},#{deptId},#{email},#{mobile},#{salt},#{valid},
+		now(),now(),#{createdUser},#{modifiedUser})
+	</insert>
+	<resultMap id="sysUserDeptVO"
+		type="com.db.common.vo.SysUserDeptResult">
+		<!-- 关联查询 -->
+		<association property="sysDept" column="deptId"
+			select="com.db.sys.dao.SysDeptDao.findById"><!-- SysDeptMapper.xml 里的查询方法根据id查询名字 -->
+		</association>
+	</resultMap>
+	<!-- 1)在SysUserMapper中添加根据用户id进行用户信息查找的相关元素 -->
+	<select id="findObjectById" parameterType="int"
+		resultMap="sysUserDeptVO">
+		select *
+		from sys_users
+		where id=#{id}
+	</select>
+
+	<!-- 1)基于SysUserDao中的更新方法,定义更新元素 2)基于SysUserRoleDao接口中删除方法,定义对应的删除元素. -->
+	<update id="updateObject"
+		parameterType="com.db.sys.entity.SysUser">
+		update sys_users
+		<set>
+			<if test="username!=null and username!=''">
+				username=#{username},
+			</if>
+
+			<if test="email!=null and email!=''">
+				email=#{email},
+			</if>
+			<if test="mobile!=null and mobile!=''">
+				mobile=#{mobile},
+			</if>
+			<if test="deptId!=null and deptId!=''">
+				deptId=#{deptId},
+			</if>
+
+			<if test="modifiedUser!=null and modifiedUser!=''">
+				modifiedUser=#{modifiedUser},
+			</if>
+			modifiedTime=now()
+		</set>
+		where id=#{id}
+	</update>
+
+	<!-- 查询有没有同名的和相同手机号和邮箱 -->
+	<select id="findObjectByUser" resultType="int">
+		select count(*) 
+		from sys_users
+		 where ${colName}=#{colValue}
+	</select>
+
+	<!-- 基于用户名查找所有用户信息 -->
+	<select id="findUserByUserName"
+		resultType="com.db.sys.entity.SysUser">
+		select *
+		from sys_users
+		where username=#{username}
+	</select>
+</mapper>
+
+
+

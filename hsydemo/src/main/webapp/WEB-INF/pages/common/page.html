@@ -1,0 +1,60 @@
+<ul class="pagination pagination-sm no-margin pull-right">
+	<li><a class="first">首页</a></li>
+	<li><a class="pre">上一页</a></li>
+	<li><a class="next">下一页</a></li>
+	<li><a class="last">尾页</a></li>
+	<li><a class="rowCount">总记录数(0)</a></li>
+	<li><a class="pageCount">总页数(0)</a></li>
+	<li><a class="pageCurrent">当前页(1)</a></li>
+</ul>
+<script type="text/javascript">
+	//触发点击事件点击上面的按钮执行
+	$(function() {
+		$("#pageId").on("click", ".first,.pre,.next,.last", doJumpToPage);
+	});
+
+	//基于点击事件，执行当前页的查询
+	function doJumpToPage() {
+		//1.获取点击对象中class属性的值 this表示你当前选择的对象
+		var cls = $(this).prop("class");
+		//alert(cls);
+		//2.基于class属性执行页码的修改，执行页码值的修改
+		//2.1获取pageid对应的对象上绑定的值 
+		var pageCurrent = $("#pageId").data("pageCurrent");
+		var pageCount = $("#pageId").data("pageCount");
+		//2.2修改页码值
+		if (cls == "first") {
+			pageCurrent = 1;//如果是首页，当前页页码值等于1
+		} else if (cls == "pre" && pageCurrent > 1) {
+			//如果是上一页并且当前页码值是>1的情况下
+			pageCurrent--;
+		} else if (cls == "next" && pageCurrent < pageCount) {
+			pageCurrent++;
+		} else if (cls == "last") {
+			pageCurrent = pageCount;
+		}
+			//3.基于修改看的页码值进行当前页的查询
+		 //3.1重新绑定当前页码值
+	      $("#pageId").data("pageCurrent",pageCurrent);
+	      //3.2重新执行查询操作
+	      doGetObjects();
+		
+	}
+
+	//初始化分页信息
+	function doSetPagination(pageObject) {
+		//1.初始化总记录数
+		$(".rowCount").html("总记录数(" + pageObject.rowCount + ")");
+		//2。初始化总页数
+		$(".pageCount").html("总页数(" + pageObject.pageCount + ")");
+		//3。初始化当前页
+		$(".pageCurrent").html("当前页(" + pageObject.pageCurrent + ")");
+
+		//4.执行数据绑定操作(借助data函数,jquery提供)
+		//因为 当前页和总页数要改变还要调用所以绑定到#pageId对象上
+		$("#pageId").data("pageCount", pageObject.pageCount);
+		$("#pageId").data("pageCurrent", pageObject.pageCurrent);
+	}
+</script>
+
+
